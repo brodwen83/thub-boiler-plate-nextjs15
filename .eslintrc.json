@@ -1,3 +1,57 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next", "next/core-web-vitals", "prettier"],
+  "overrides": [
+    {
+      "files": "**/*.+(ts|tsx)",
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint/eslint-plugin"],
+      "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "no-use-before-define": [0],
+        "@typescript-eslint/no-use-before-define": [
+          "error",
+          { "functions": true, "classes": true, "variables": true, "typedefs": true, "enums": true }
+        ],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+  "plugins": ["prettier", "check-file", "n"],
+  "rules": {
+    "n/no-process-env": ["error"],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "no-console": ["error", { "allow": ["error", "warn"] }],
+    "camelcase": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unused-prop-types": "off",
+    "react/require-default-props": "off",
+    "import/extensions": ["error", "ignorePackages", { "ts": "never", "tsx": "never", "js": "never", "jsx": "never" }],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      { "components": ["Link"], "specialLink": ["hrefLeft", "hrefRight"], "aspects": ["invalidHref", "preferButton"] }
+    ],
+    "prefer-arrow-callback": ["error"],
+    "prefer-template": ["error"],
+    "semi": "error",
+    "check-file/filename-naming-convention": [
+      "error",
+      { "**/*.{ts,tsx}": "KEBAB_CASE" },
+      {
+        // ignore the middle extensions of the filename to support filename like babel.config.js or smoke.spec.ts
+        "ignoreMiddleExtensions": true
+      }
+    ],
+    "check-file/folder-naming-convention": [
+      "error",
+      {
+        // all folders within src (except __tests__)should be named in kebab-case
+        "src/**": "KEBAB_CASE"
+      }
+    ]
+  }
 }
